@@ -1,10 +1,10 @@
 {
   "name": "pick-lines-from-file",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Pick several lines from file by line number.",
   "main": "index.js",
   "scripts": {
-    "test": "test"
+    "test": "node ./node_modules/mocha/bin/mocha"
   },
   "repository": {
     "type": "git",
