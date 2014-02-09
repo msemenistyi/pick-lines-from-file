@@ -29,6 +29,18 @@ describe('pick-lines-from-file should', function(){
 		};
 		pickLines(options);
 	});
+
+	it('should return one line if linesAround is not specified', function(done){
+		var options = Object.create(stdOptions);
+		options.callback = function(err, data){
+			data.startAt.should.be.equal(5);
+			data.endAt.should.be.equal(5);
+			data.lines.length.should.be.equal(1);
+			data.lines[0].should.be.equal('So that the fields, the boundless steppes,');
+			done();
+		};
+		pickLines(options);
+	});
 	
 	it('should not contain \\r for windows lines', function(done){
 		var options = Object.create(stdOptions);
@@ -48,6 +60,42 @@ describe('pick-lines-from-file should', function(){
 			data.endAt.should.be.equal(5);
 			data.lines[0].should.be.equal('Testament (Zapovit)');
 			done();
+		};
+		pickLines(options);
+	});
+	
+	it('should return error if line number is bigger than lines in file number', 
+		function(done){
+			var options = Object.create(stdOptions);
+			options.lineNumber = 27;
+			options.callback = function(err, data){
+				err.should.be.not.equal(false);
+				(typeof data).should.be.equal('undefined');
+				done();
+		};
+		pickLines(options);
+	});
+	
+	it('should return error if file is missing', 
+		function(done){
+			var options = Object.create(stdOptions);
+			options.filePath = 'asd';
+			options.callback = function(err, data){
+				err.should.be.not.equal(false);
+				(typeof data).should.be.equal('undefined');
+				done();
+		};
+		pickLines(options);
+	});
+	
+	it('should return error if lineNumber is missing', 
+		function(done){
+			var options = Object.create(stdOptions);
+			options.lineNumber = undefined;
+			options.callback = function(err, data){
+				err.should.be.not.equal(false);
+				(typeof data).should.be.equal('undefined');
+				done();
 		};
 		pickLines(options);
 	});
