@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/msemenistyi/pick-lines-from-file.png?branch=master)](https://travis-ci.org/msemenistyi/pick-lines-from-file)
+
 ## Install
 > npm install pick-lines-from-file
 
