@@ -1,0 +1,28 @@
+{
+  "name": "pick-lines-from-file",
+  "version": "0.0.0",
+  "description": "Pick several lines from file by line number.",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/msemenistyi/pick-lines-from-file.git"
+  },
+  "keywords": [
+    "line",
+    "lines",
+    "file"
+  ],
+  "author": "msemenistyi",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/msemenistyi/pick-lines-from-file/issues"
+  },
+  "homepage": "https://github.com/msemenistyi/pick-lines-from-file",
+  "devDependencies": {
+    "mocha": "~1.17.1",
+    "should": "~3.1.2"
+  }
+}
