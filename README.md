@@ -12,9 +12,8 @@ is to pick one line which is probably important one and also context for it
 
 Basic usage example
 ```js
-var LinePicker = require('pick-lines-from-file');
-var linePicker = new LinePicker(__dirname + '/zapovit.txt');
-linePicker.lineNumbers(3).linesAround(2).fetch(function(err, data){
+var linePicker = require('pick-lines-from-file');
+linePicker(__dirname + '/zapovit.txt').lineNumbers(3).linesAround(2).fetch(function(err, data){
 	if (!err){
 		//do something with data
 	}	
@@ -23,9 +22,8 @@ linePicker.lineNumbers(3).linesAround(2).fetch(function(err, data){
 
 Extended usage example
 ```js
-	var LinePicker = require('pick-lines-from-file');
-	var linePicker = new LinePicker(__dirname + '/zapovit.txt');
-	linePicker.lineNumbers(7).linesAround(4).fetch(function(err, data){
+	var linePicker = require('pick-lines-from-file');
+	linePicker(__dirname + '/zapovit.txt').lineNumbers(7).linesAround(4).fetch(function(err, data){
 		if (!err){
 			var start = data.startAt;
 			var linesCount = data.endAt - data.startAt;
@@ -40,9 +38,8 @@ Extended usage example
 
 Providing multiple line numbers
 ```js
-var LinePicker = require('pick-lines-from-file');
-var linePicker = new LinePicker(__dirname + '/zapovit.txt');
-linePicker.lineNumbers([1, 4, 3]).linesAround(2).fetch(function(err, data){
+var linePicker = require('pick-lines-from-file');
+linePicker(__dirname + '/zapovit.txt').lineNumbers([1, 4, 3]).linesAround(2).fetch(function(err, data){
 	if (!err){
 		for (var i = 0, l = data.length; i < l; i++){
 			console.log(data[i].lines);
@@ -56,9 +53,9 @@ linePicker.lineNumbers([1, 4, 3]).linesAround(2).fetch(function(err, data){
 
 ###API
 
-- **LinePicker** (*String* filepath) constructor accepts one parameter **filePath** - path to file 
-which should be read. If fs.readFile returns error, it's being passed to 
-callback provided.
+- **linePicker** (*String* filepath) is LinePicker factory which accepts one 
+parameter **filePath** - path to file which should be read. If fs.readFile 
+returns error, it's being passed to callback provided.
 - **lineNumbers** (*Integer | Array* lineNumbers) - defines center line number (which is 
 most probably the one you are insterested in) or array of line numbers.
 - **linesAround** (*Integer* linesAround) - defines number of lines to the top and to 

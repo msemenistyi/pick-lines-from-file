@@ -1,7 +1,10 @@
 var fs = require('fs');
 var linefeed = process.platform === 'win32' ? '\r\n' : '\n';
 
-module.exports = LinePicker;
+module.exports = function(filePath){
+	return new LinePicker(filePath);
+}
+
 
 function LinePicker(filePath){
 	this.filePath = filePath;

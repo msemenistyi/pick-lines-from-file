@@ -1,6 +1,6 @@
 {
   "name": "pick-lines-from-file",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Pick several lines from file by line number.",
   "main": "index.js",
   "scripts": {
