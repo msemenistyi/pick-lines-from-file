@@ -10,13 +10,22 @@ is to pick one line which is probably important one and also context for it
 
 ##Usage
 
+Basic usage example
 ```js
-	var pickLines = require('pick-lines-from-file');
-	var options = {
-		filePath: __dirname + '/zapovit.txt',
-		lineNumber: 3,
-		linesAround: 2,
-		callback: function (err, data){
+var LinePicker = require('pick-lines-from-file');
+var linePicker = new LinePicker(__dirname + '/zapovit.txt');
+linePicker.lineNumbers(3).linesAround(2).fetch(function(err, data){
+	if (!err){
+		//do something with data
+	}	
+});
+```
+
+Extended usage example
+```js
+	var LinePicker = require('pick-lines-from-file');
+	var linePicker = new LinePicker(__dirname + '/zapovit.txt');
+	linePicker.lineNumbers(7).linesAround(4).fetch(function(err, data){
 		if (!err){
 			var start = data.startAt;
 			var linesCount = data.endAt - data.startAt;
@@ -25,29 +34,50 @@ is to pick one line which is probably important one and also context for it
 				console.log('#' + (start + i));
 				console.log('|' + data.lines[i]);
 			}
-		}
-	};
-	pickLines(options);
+		}	
+	});
 ```
 
-###Options 
-- **filePath** - path to file which should be read. If fs.readFile returns error,
-it's being passed to callback provided.
-- **lineNumber** - center line number (which is most probably the one you are
-insterested in).
-- **linesAround** - number of lines to the top and to the bottom of center line
-which also will be returned from function. (e.g. for linesAround = 2 two lines
-would be taken to the top of lineNumber and to the bottom). If there are no
-more lines available at the start or at the end of the file, all possible will 
-be returned. 
-- **callback** - function which will be executed after file is processed. Function
-accepts 2 arguments. The first one is **error** and the second is **data**.  
+Providing multiple line numbers
+```js
+var LinePicker = require('pick-lines-from-file');
+var linePicker = new LinePicker(__dirname + '/zapovit.txt');
+linePicker.lineNumbers([1, 4, 3]).linesAround(2).fetch(function(err, data){
+	if (!err){
+		for (var i = 0, l = data.length; i < l; i++){
+			console.log(data[i].lines);
+			console.log(data[i].startAt);
+			console.log(data[i].endAt);
+		}
+	}	
+});
+```
+
+
+###API
+
+- **LinePicker** (*String* filepath) constructor accepts one parameter **filePath** - path to file 
+which should be read. If fs.readFile returns error, it's being passed to 
+callback provided.
+- **lineNumbers** (*Integer | Array* lineNumbers) - defines center line number (which is 
+most probably the one you are insterested in) or array of line numbers.
+- **linesAround** (*Integer* linesAround) - defines number of lines to the top and to 
+the bottom of center line which also will be returned from function. (e.g. 
+for linesAround = 2 two lines would be taken to the top of lineNumber and to the 
+bottom). If there are no more lines available at the start or at the end of the 
+file, all possible will be returned. 
+- **fetch** (*Function* callback) - executes the query. Should be the end of method 
+chain function which will be executed after file is 
+processed. Function accepts 2 arguments. The first one is **error** and the 
+second is **data**.  
 
 **Data** hash contains 3 properties:
 - **lines** - array of lines picked.
 - **startAt** - the first returned line number. 
 - **endAt** - the last returned line number. 
 
+If single lineNumber was provided, data hash is returned from function, otherwise
+array of data is returned.
 
 ##Contributing
 Feel free to open issues and send PRs, though make sure that you create tests
