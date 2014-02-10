@@ -11,22 +11,23 @@ is to pick one line which is probably important one and also context for it
 ##Usage
 
 ```js
-		var options = {
-			filePath: __dirname + '/zapovit.txt',
-			lineNumber: 3,
-			linesAround: 2,
-			callback: function (err, data){
-			if (!err){
-				var start = data.startAt;
-				var linesCount = data.endAt - data.startAt;
-				console.log('Total ' + linesCount + 'lines.');
-				for (var i = 0, l = data.lines.length; i < l; i++)
-					console.log('#' + (start + i));
-					console.log('|' + data.lines[i]);
-				}
+	var pickLines = require('pick-lines-from-file');
+	var options = {
+		filePath: __dirname + '/zapovit.txt',
+		lineNumber: 3,
+		linesAround: 2,
+		callback: function (err, data){
+		if (!err){
+			var start = data.startAt;
+			var linesCount = data.endAt - data.startAt;
+			console.log('Total ' + linesCount + 'lines.');
+			for (var i = 0, l = data.lines.length; i < l; i++)
+				console.log('#' + (start + i));
+				console.log('|' + data.lines[i]);
 			}
-		};
-		pickLines(options);
+		}
+	};
+	pickLines(options);
 ```
 
 ###Options 
