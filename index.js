@@ -54,7 +54,8 @@ LinePicker.prototype.fetch = function(callback) {
 				result.push({
 					lines: lines.slice(startLine, endLine + 1),
 					startAt: startLine,
-					endAt: endLine
+					endAt: endLine,
+					lineNumber: lineNumber 
 				});
 			} else {
 				callback('pick-lines-from-file: file' + this.filePath + 

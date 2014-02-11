@@ -72,6 +72,7 @@ second is **data**.
 - **lines** - array of lines picked.
 - **startAt** - the first returned line number. 
 - **endAt** - the last returned line number. 
+- **lineNumber** - requested line number which was passed as an argument.
 
 If single lineNumber was provided, data hash is returned from function, otherwise
 array of data is returned.
