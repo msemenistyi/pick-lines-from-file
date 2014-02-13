@@ -117,6 +117,14 @@ describe('pick-lines-from-file should', function(){
 			done();
 		});
 	});
+
+	it('should work for unix line endings', function(done){
+		linePicker(__dirname + '/fixtures/zapovit_unix.txt').lineNumbers(5).linesAround(2).fetch(function (err, data){
+			data.should.be.ok;
+			data.lines[data.lines.length - 1].should.be.equal('My eyes could see, my ears could hear');
+			done();
+		});
+	});
 	
 });
 

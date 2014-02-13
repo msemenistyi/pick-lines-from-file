@@ -1,5 +1,4 @@
 var fs = require('fs');
-var linefeed = process.platform === 'win32' ? '\r\n' : '\n';
 
 module.exports = function(filePath){
 	return new LinePicker(filePath);
@@ -32,12 +31,14 @@ LinePicker.prototype.fetch = function(callback) {
 	fs.readFile(this.filePath, function(err, f){
 		if (err) {callback(err); return;}
 		if (typeof this.lineNumbersCollection === 'undefined') {
-			callback('pick-lines-from-file: at least one line number should be' +  
+			callback('pick-lines-from-file>>> at least one line number should be' +  
 				'defined. Call lineNumbers method with integer argument before fetch');
 			return;
 		}
-		var lines = f.toString().split(linefeed),
-		 lineNumber,
+		var content = String(f);
+		var linefeed = content.indexOf('\r\n') !== -1 ? '\r\n' : '\n';
+		var lines = content.split(linefeed);
+		var lineNumber,
 		 result = [];
 
 		for (var i = 0, l = this.lineNumbersCollection.length; i < l; i++){
@@ -58,8 +59,8 @@ LinePicker.prototype.fetch = function(callback) {
 					lineNumber: lineNumber 
 				});
 			} else {
-				callback('pick-lines-from-file: file' + this.filePath + 
-					'doesn\'t have ' + lineNumber + 'lines');
+				callback('pick-lines-from-file>>> file' + this.filePath + 
+					'doesn\'t have ' + lineNumber + ' lines');
 				return;
 			}
 		}
